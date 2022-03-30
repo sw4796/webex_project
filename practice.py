@@ -99,19 +99,31 @@ win = gw.getWindowsWithTitle('webex')[0]
 
 if win.isActive == False:
     pywinauto.application.Application().connect(handle=win._hWnd).top_window().set_focus()
-win.activate()
+    win.activate()
+
+if win.isMaximized == False:
+    win.maximize()
 
 #화면에서 카메라 아이콘 탐색
-test1 = list(pyautogui.locateAllOnScreen("camera_on.png", confidence=0.9))
-print(len(test1))
+while(True):
+    #화면 활성화, 최대화
+    if win.isActive == False:
+        pywinauto.application.Application().connect(handle=win._hWnd).top_window().set_focus()
+        win.activate()
 
-# 메인 함수 시작(카메라 아이콘이 3개 이상일때 실행)
-if len(test1) > 2:
+    if win.isMaximized == False:
+        win.maximize()
 
-    #webex 종료 버튼 누르기
-    button_exit = pyautogui.locateCenterOnScreen("exit.png")
-    pyautogui.click(button_exit)
+    test1 = list(pyautogui.locateAllOnScreen("camera_on.png", confidence=0.9))
+    print(len(test1))
 
+    # 메인 동작 시작(카메라 아이콘이 3개 이상일때 실행)
+    if len(test1) > 2:
+        #webex 종료 버튼 누르기
+        button_exit = pyautogui.locateCenterOnScreen("exit.png")
+        pyautogui.click(button_exit)
+        break
+    time.sleep(5.0)
 
 
 # 키값: bkrjauxcwowlodxe
