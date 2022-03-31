@@ -97,13 +97,6 @@ pyautogui.FAILSAFE = False
 # 웹엑스 화면 활성화
 win = gw.getWindowsWithTitle('webex')[0]
 
-if win.isActive == False:
-    pywinauto.application.Application().connect(handle=win._hWnd).top_window().set_focus()
-    win.activate()
-
-if win.isMaximized == False:
-    win.maximize()
-
 #화면에서 카메라 아이콘 탐색
 while(True):
     #화면 활성화, 최대화
@@ -114,6 +107,14 @@ while(True):
     if win.isMaximized == False:
         win.maximize()
 
+    if pyautogui.locateCenterOnScreen("student_list_off.png"):
+        button_list = pyautogui.locateCenterOnScreen("student_list_off.png")
+        pyautogui.click(button_list)
+
+    if pyautogui.locateCenterOnScreen("chat_on.png"):
+        button_chat = pyautogui.locateCenterOnScreen("chat_on.png")
+        pyautogui.click(button_chat)
+
     test1 = list(pyautogui.locateAllOnScreen("camera_on.png", confidence=0.9))
     print(len(test1))
 
@@ -122,6 +123,7 @@ while(True):
         #webex 종료 버튼 누르기
         button_exit = pyautogui.locateCenterOnScreen("exit.png")
         pyautogui.click(button_exit)
+        time.sleep(1)
         button_exit_check = pyautogui.locateCenterOnScreen("exit_check.png")
         pyautogui.click(button_exit_check)
         break
