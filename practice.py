@@ -122,6 +122,8 @@ while(True):
         #webex 종료 버튼 누르기
         button_exit = pyautogui.locateCenterOnScreen("exit.png")
         pyautogui.click(button_exit)
+        button_exit_check = pyautogui.locateCenterOnScreen("exit_check.png")
+        pyautogui.click(button_exit_check)
         break
     time.sleep(5.0)
 
